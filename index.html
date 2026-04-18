@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    class="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-8"
+  >
+    <div class="w-full max-w-sm">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div
+          class="inline-flex items-center justify-center w-12 h-12 bg-white border border-gray-200 rounded-full mb-4"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="text-gray-500"
+          >
+            <path d="M3 22V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15" />
+            <path d="M15 9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2" />
+            <path d="M3 22h12" />
+            <path d="M7 10h4" />
+            <path d="M7 14h4" />
+          </svg>
+        </div>
+        <h1 class="text-xl font-medium text-gray-900 mb-1">
+          Gasoline contribution
+        </h1>
+        <p class="text-sm text-gray-500">
+          Compute your fair share of fuel cost
+        </p>
+      </div>
+
+      <!-- Card -->
+      <div
+        class="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4"
+      >
+        <!-- Distance -->
+        <div>
+          <label
+            for="distance"
+            class="block text-xs font-medium text-gray-500 uppercase tracking-wide mb-1.5"
+            >Distance (km)</label
+          >
+          <input
+            type="number"
+            id="distance"
+            placeholder="e.g. 150"
+            min="0"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          />
+        </div>
+
+        <!-- Vehicle -->
+        <div>
+          <label
+            for="mc"
+            class="block text-xs font-medium text-gray-500 uppercase tracking-wide mb-1.5"
+            >Vehicle</label
+          >
+          <select
+            id="mc"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          >
+            <optgroup label="🛵 Scooters (Automatic)">
+              <option value="63.5">Honda Beat — 63 km/L</option>
+              <option value="53">Honda Click 125i — 53 km/L</option>
+              <option value="59">Honda Genio — 59 km/L</option>
+              <option value="58">Honda Dio — 58 km/L</option>
+              <option value="53">Suzuki Burgman Street — 53 km/L</option>
+              <option value="50">
+                Yamaha Mio i125 / Gear / Soul — 50 km/L
+              </option>
+              <option value="35">Yamaha Aerox 155 — 35 km/L</option>
+              <option value="40">Yamaha NMAX 155 — 40 km/L</option>
+              <option value="42.5">Honda PCX 160 — 42 km/L</option>
+              <option value="42.5">Honda ADV 160 — 42 km/L</option>
+            </optgroup>
+            <optgroup label="🏍️ Underbone / Semi-Manual">
+              <option value="60">Honda Wave RSX — 60 km/L</option>
+              <option value="65">Suzuki Smash — 65 km/L</option>
+              <option value="60">Honda XRM 125 — 60 km/L</option>
+              <option value="50">Suzuki Raider R150 FI — 50 km/L</option>
+              <option value="65">Suzuki Raider J — 65 km/L</option>
+              <option value="45">Yamaha Sniper 155 — 45 km/L</option>
+              <option value="65">Honda RS125 FI — 65 km/L</option>
+            </optgroup>
+            <optgroup label="🏍️ Pantra / Business (Workhorse)">
+              <option value="62.5">Honda TMX 125 Alpha — 62 km/L</option>
+              <option value="50">Yamaha YTX 125 — 50 km/L</option>
+              <option value="85">Kawasaki CT100 — 85 km/L</option>
+              <option value="40">Kawasaki Barako II / III — 40 km/L</option>
+            </optgroup>
+            <optgroup label="🏍️ Entry Manual / Street">
+              <option value="42.5">Suzuki Gixxer 150 — 42 km/L</option>
+              <option value="35">Rouser NS160 / NS200 — 35 km/L</option>
+              <option value="35">Yamaha FZ — 35 km/L</option>
+            </optgroup>
+            <optgroup label="🚗 Cars">
+              <option value="35">Saab — 35 km/L</option>
+              <option value="40">Fiat — 40 km/L</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Gas price -->
+        <div>
+          <label
+            for="gas_price"
+            class="block text-xs font-medium text-gray-500 uppercase tracking-wide mb-1.5"
+            >Gas price (₱ per liter)</label
+          >
+          <input
+            type="number"
+            id="gas_price"
+            placeholder="e.g. 65"
+            min="0"
+            step="0.01"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          />
+        </div>
+
+        <!-- Button -->
+        <button
+          id="compute-btn"
+          onclick="compute()"
+          class="cursor-pointer w-full mt-1 bg-gray-900 hover:bg-gray-700 active:scale-95 text-white text-sm font-medium py-2.5 rounded-lg transition-all duration-150 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-gray-900 disabled:active:scale-100"
+        >
+          <svg
+            id="spinner"
+            class="hidden animate-spin"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+            />
+          </svg>
+          <span id="btn-label">Compute</span>
+        </button>
+
+        <!-- Error -->
+        <p id="error-msg" class="hidden text-sm text-red-500 text-center"></p>
+
+        <!-- Result -->
+        <div
+          id="result-card"
+          class="hidden bg-gray-50 border border-gray-200 rounded-xl p-4"
+        >
+          <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">
+            Total fuel cost
+          </p>
+          <p id="result-value" class="text-3xl font-medium text-gray-900"></p>
+          <div class="border-t border-gray-200 mt-3 pt-3 flex flex-col gap-1.5">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Fuel used</span>
+              <span id="liters-used" class="text-gray-900"></span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Efficiency</span>
+              <span id="efficiency" class="text-gray-900"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-xs text-gray-400 mt-8">Joven @ 2026</footer>
+
+    <script>
+      function compute() {
+        const dist = parseFloat(document.getElementById("distance").value);
+        const eff = parseFloat(document.getElementById("mc").value);
+        const price = parseFloat(document.getElementById("gas_price").value);
+        const errEl = document.getElementById("error-msg");
+        const resultCard = document.getElementById("result-card");
+        const btn = document.getElementById("compute-btn");
+        const spinner = document.getElementById("spinner");
+        const btnLabel = document.getElementById("btn-label");
+
+        errEl.classList.add("hidden");
+        resultCard.classList.add("hidden");
+
+        if (!dist || !price || dist <= 0 || price <= 0) {
+          errEl.textContent = "Please fill in all fields with valid values.";
+          errEl.classList.remove("hidden");
+          return;
+        }
+
+        // Start loading
+        btn.disabled = true;
+        spinner.classList.remove("hidden");
+        btnLabel.textContent = "Computing...";
+
+        setTimeout(() => {
+          const liters = dist / eff;
+          const total = liters * price;
+
+          document.getElementById("result-value").textContent =
+            "₱" + total.toFixed(2);
+          document.getElementById("liters-used").textContent =
+            liters.toFixed(2) + " L";
+          document.getElementById("efficiency").textContent = eff + " km/L";
+          resultCard.classList.remove("hidden");
+
+          // Reset button
+          btn.disabled = false;
+          spinner.classList.add("hidden");
+          btnLabel.textContent = "Compute";
+        }, 3000);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") compute();
+      });
+    </script>
+  </body>
+</html>
